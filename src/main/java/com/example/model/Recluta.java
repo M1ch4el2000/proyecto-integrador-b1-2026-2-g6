@@ -1,42 +1,39 @@
 package com.example.model;
 
-import java.time.LocalDateTime;
-
-public class Recluta{
+public class Recluta extends Ramas_UNSC{
     private Long id; // para que sea autogenerado por la BD
     private String nombre;
     private String apellido;
     private int edad;
     private double peso;
     private double altura;
-    private LocalDateTime fechaRegistro;
 
     // ===================
     // Constructor completo
     // ===================
-    public Recluta(Long id, String nombre, String apellido, int edad, double peso, double altura, LocalDateTime fechaRegistro) {
+    public Recluta(Long id, String nombre, String apellido, int edad, double peso, double altura) {
+        super();
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.peso = peso;
         this.altura = altura;
-        this.fechaRegistro = fechaRegistro;
     }
 
     // ===================
     // Constructor sin ID
     // (para insertar nuevos usuarios sin ID)
     // ===================
-    public Recluta(String nombre, String apellido, int edad, double peso, double altura, LocalDateTime fechaRegistro) {
-        this(null, nombre, apellido, edad, peso, altura, fechaRegistro);
+    public Recluta(String nombre, String apellido, int edad, double peso, double altura) {
+        this(null, nombre, apellido, edad, peso, altura);
     }
 
     // ===================
     // Constructor vacío
     // ===================
     public Recluta() {
-        this.fechaRegistro = LocalDateTime.now();
+    
     }
 
     // ===================
@@ -90,16 +87,8 @@ public class Recluta{
         this.altura = altura;
     }
 
-    public LocalDateTime getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
     @Override
     public String toString() {
-        return "Recluta [id= " + id + ", Name= " + nombre + "Apellido= " + apellido + "]";
+        return "Recluta [id= " + id + ", Name= " + nombre + ", Apellido= " + apellido + "sirviendo en= " + getRama() + "]";
     }
 }
