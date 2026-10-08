@@ -8,6 +8,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -101,6 +102,8 @@ public class MainView extends VerticalLayout {
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
 
+        Paragraph infoParagraph1 = new Paragraph("Las divisiones especiales son solo para soldados con experiencia, si quiere saber si es apto para prestar servicio en una de estas divisiones por favor diligencie el formulario y se le dará respuesta por tardar en 5 días.");
+        Paragraph infoParagraph2 = new Paragraph("United Nations Space Command - UNSC");
         TextField idField = new TextField("ID");
         Select<String> ramaActual = new Select<String>();
         ramaActual.setLabel("Rama Actual");
@@ -110,6 +113,7 @@ public class MainView extends VerticalLayout {
         divisionDeInteres.setLabel("Division de Interes");
         divisionDeInteres.setItems("Soldado de choque de descenso orbital (ODST)", "Oficina Naval de Inteligencia (ONI)");
 
+        VerticalLayout verticalP = new VerticalLayout(infoParagraph1, infoParagraph2);
         FormLayout form = new FormLayout(idField, ramaActual, divisionDeInteres);
 
         Button btnCrear = new Button("Crear", e -> 
@@ -146,7 +150,7 @@ public class MainView extends VerticalLayout {
         grid.addColumn(row -> row[1]).setHeader("Título").setAutoWidth(true);
         grid.addColumn(row -> row[2]).setHeader("Categoría").setAutoWidth(true);
 
-        layout.add(form, acciones, grid);
+        layout.add(verticalP ,form, acciones, grid);
         return layout;
     }
 }

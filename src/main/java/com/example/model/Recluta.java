@@ -2,7 +2,7 @@ package com.example.model;
 
 import java.time.LocalDateTime;
 
-public class Recluta {
+public class Recluta{
     private Long id; // para que sea autogenerado por la BD
     private String nombre;
     private String apellido;
