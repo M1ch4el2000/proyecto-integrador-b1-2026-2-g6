@@ -1,5 +1,7 @@
 package com.example;
 
+import org.jetbrains.kotlin.it.unimi.dsi.fastutil.shorts.T;
+
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -11,10 +13,11 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Gestión CRUD - 2 Entidades")
+@PageTitle("UNSC - Sistema de reclutamiento")
 @Route("")
 public class MainView extends VerticalLayout {
 
@@ -23,27 +26,34 @@ public class MainView extends VerticalLayout {
         setPadding(true);
         setSpacing(true);
 
-        H2 titulo = new H2("Gestión de Entidades (CRUD)");
+        H2 titulo = new H2("UNSC - Sistema de reclutamiento");
 
         TabSheet tabSheet = new TabSheet();
         tabSheet.setWidthFull();
 
-        tabSheet.add("Entidad 1", crearSeccionEntidad1());
-        tabSheet.add("Entidad 2", crearSeccionEntidad2());
+        tabSheet.add("UNSC - Ramas", crearSeccionArmada());
+        tabSheet.add("Divisiones especiales", crearSeccionDivisionesEspeciales());
 
         add(titulo, tabSheet);
     }
 
     // Método privado para gestionar la primera entidad
-    private Component crearSeccionEntidad1() {
+    private Component crearSeccionArmada() {
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
 
         TextField idField = new TextField("ID");
         TextField nombreField = new TextField("Nombre");
-        TextField descripcionField = new TextField("Descripción");
+        TextField apellidoField = new TextField("Apellido");
+        TextField edadField = new TextField("Edad");
+        TextField pesoField = new TextField("Peso");
+        TextField alturaField = new TextField("Altura");
+        Select<String> ramaDeseada = new Select<String>();
+        ramaDeseada.setLabel("Rama deseada");
+        ramaDeseada.setItems("Armada", "Cuerpo de marines", "Ejercito", "Fuerza Aerea", "Cuerpo Spartan");
+        ramaDeseada.setValue("");
 
-        FormLayout form = new FormLayout(idField, nombreField, descripcionField);
+        FormLayout form = new FormLayout(idField, nombreField, apellidoField, edadField, pesoField, alturaField, ramaDeseada);
 
         Button btnCrear = new Button("Crear", e -> 
             Notification.show("Entidad 1 - Crear: " + nombreField.getValue())
@@ -66,7 +76,10 @@ public class MainView extends VerticalLayout {
         Button btnLimpiar = new Button("Limpiar", e -> {
             idField.clear();
             nombreField.clear();
-            descripcionField.clear();
+            apellidoField.clear();
+            edadField.clear();
+            pesoField.clear();
+            alturaField.clear();
         });
 
         HorizontalLayout acciones = new HorizontalLayout(
@@ -84,18 +97,23 @@ public class MainView extends VerticalLayout {
     }
 
     // Método privado para gestionar la segunda entidad
-    private Component crearSeccionEntidad2() {
+    private Component crearSeccionDivisionesEspeciales() {
         VerticalLayout layout = new VerticalLayout();
         layout.setPadding(false);
 
-        TextField idField = new TextField("Código / ID");
-        TextField tituloField = new TextField("Título");
-        TextField categoriaField = new TextField("Categoría");
+        TextField idField = new TextField("ID");
+        Select<String> ramaActual = new Select<String>();
+        ramaActual.setLabel("Rama Actual");
+        ramaActual.setItems("Armada", "Cuerpo de marines", "Ejercito", "Fuerza Aerea", "Cuerpo Spartan");
+        ramaActual.setValue("");
+        Select<String> divisionDeInteres = new Select<String>();
+        divisionDeInteres.setLabel("Division de Interes");
+        divisionDeInteres.setItems("Soldado de choque de descenso orbital (ODST)", "Oficina Naval de Inteligencia (ONI)");
 
-        FormLayout form = new FormLayout(idField, tituloField, categoriaField);
+        FormLayout form = new FormLayout(idField, ramaActual, divisionDeInteres);
 
         Button btnCrear = new Button("Crear", e -> 
-            Notification.show("Entidad 2 - Crear: " + tituloField.getValue())
+            Notification.show("Entidad 2 - Crear: " + ramaActual.getValue())
         );
         btnCrear.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
@@ -114,8 +132,8 @@ public class MainView extends VerticalLayout {
 
         Button btnLimpiar = new Button("Limpiar", e -> {
             idField.clear();
-            tituloField.clear();
-            categoriaField.clear();
+            ramaActual.clear();
+            divisionDeInteres.clear();
         });
 
         HorizontalLayout acciones = new HorizontalLayout(
