@@ -1,0 +1,58 @@
+ESTE DOCUMENTO DESCRIBE DE MANERA SIMPLIFICADA Y GLOBAL QUE SE ESPERA DESARROLLAR
+Y QUE FUNCIONALIDADES SE TENDRÁN AL FINALIZAR EL DESARROLLO.
+
+OBJETIVO DEL PROYECTO:
+    Crear un sistema de gestion completa (adiccion, modificacion, busqueda y eliminacion) de recursos 
+    para el UNSC (United Nations Space Command o Comando Espacial de las Naciones Unidas).
+    El sistema permitira gestionar tanto soldados, divisiones de la UNSC y armamento
+    de la UNSC. La gestion de estos recursos se realizara mediante una interfaz visual
+    y estara sujeto a futuras reglas de negocio a implementarse que seran especificadas
+    posteriormente.
+
+LIMITACIONES TECNICAS:
+    El proyecto se desarrollara bajo las siguientes tecnologias
+    FRONT END:
+        Vaadin Framework y Java
+    BACK END:
+        Java y Maven
+    BASE DE DATOS:
+        SQL Server
+    
+    REGLAS:
+        -El proyecto no tendra una arquitectura ni patrones de diseno prefedinidos,
+         Los desarrolladores tendran la libertad de desarrollar el proyecto bajo sus 
+ propias preferencias.
+        
+        -El proyecto puede manejar conexion entre base de datos, back end y front end.
+         Esto para crear una aplicacion funcional.
+
+FUNCIONALIDADES BÁSICAS DEL SISTEMA:
+Modelo de IA empleado: nemotron-3.5-lightning-free | Agente: opencode
+
+    GESTIÓN DE SOLDADOS DEL UNSC:
+        - Creacion de nuevos soldados
+        - Modificación de datos de soldados
+        - Búsqueda de soldados por características
+        - Eliminación de soldados
+
+    GESTIÓN DE DIVISIONES DEL UNSC:
+        - Creacion de nuevas divisiones
+        - Modificación de datos de divisiones
+        - Búsqueda de divisiones por nombre o tipo
+        - Eliminación de divisiones
+
+    GESTIÓN DE ARMAMENTO DEL UNSC:
+        - Creacion de nuevo armamento
+        - Modificación de especificaciones de armamento
+        - Búsqueda de armamento por categoría
+        - Eliminación de armamento
+
+    INTERFAZ DE USUARIO:
+        - Implementación con Vaadin Framework
+        - Navegación entre secciones de gestión
+        - Visualización de listas de recursos
+
+    CONECTIVIDAD INTEGRADA:
+        - Conexión base de datos SQL Server ↔ Backend Java
+        - Operaciones CRUD completas
+        - Sincronización frontend-backend
