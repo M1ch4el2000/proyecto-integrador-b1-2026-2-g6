@@ -15,6 +15,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.component.checkbox.Checkbox;
 
 @PageTitle("UNSC - Sistema de reclutamiento")
 @Route("")
@@ -32,6 +33,8 @@ public class MainView extends VerticalLayout {
 
         tabSheet.add("UNSC - Ramas", crearSeccionArmada());
         tabSheet.add("Divisiones especiales", crearSeccionDivisionesEspeciales());
+        tabSheet.add("Reclutas", crearSeccionRecluta());
+        tabSheet.add("Aptos división especial", crearSeccionAptosDivisionEspecial());
 
         add(titulo, tabSheet);
     }
@@ -149,6 +152,121 @@ public class MainView extends VerticalLayout {
         grid.addColumn(row -> row[2]).setHeader("Categoría").setAutoWidth(true);
 
         layout.add(verticalP ,form, acciones, grid);
+        return layout;
+    }
+    // Método privado para gestionar la tercera entidad: Reclutas
+    private Component crearSeccionRecluta() {
+        VerticalLayout layout = new VerticalLayout();
+        layout.setPadding(false);
+
+        TextField idField = new TextField("ID");
+        TextField nombreField = new TextField("Nombre");
+        TextField apellidoField = new TextField("Apellido");
+        TextField edadField = new TextField("Edad");
+        TextField pesoField = new TextField("Peso");
+        TextField alturaField = new TextField("Altura");
+        Select<String> ramaDeseada = new Select<String>();
+        ramaDeseada.setLabel("Rama deseada");
+        ramaDeseada.setItems("Armada", "Cuerpo de marines", "Ejercito", "Fuerza Aerea", "Cuerpo Spartan");
+
+        FormLayout form = new FormLayout(idField, nombreField, apellidoField, edadField, pesoField, alturaField, ramaDeseada);
+
+        Button btnCrear = new Button("Crear", e ->
+            Notification.show("Entidad 3 - Crear: " + nombreField.getValue())
+        );
+        btnCrear.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        Button btnConsultar = new Button("Consultar", e ->
+            Notification.show("Entidad 3 - Consultar ID: " + idField.getValue())
+        );
+
+        Button btnActualizar = new Button("Actualizar", e ->
+            Notification.show("Entidad 3 - Actualizar ID: " + idField.getValue())
+        );
+
+        Button btnEliminar = new Button("Eliminar", e ->
+            Notification.show("Entidad 3 - Eliminar ID: " + idField.getValue())
+        );
+        btnEliminar.addThemeVariants(ButtonVariant.LUMO_ERROR);
+
+        Button btnLimpiar = new Button("Limpiar", e -> {
+            idField.clear();
+            nombreField.clear();
+            apellidoField.clear();
+            edadField.clear();
+            pesoField.clear();
+            alturaField.clear();
+            ramaDeseada.clear();
+        });
+
+        HorizontalLayout acciones = new HorizontalLayout(
+            btnCrear, btnConsultar, btnActualizar, btnEliminar, btnLimpiar
+        );
+        acciones.getStyle().set("flex-wrap", "wrap");
+
+        Grid<String[]> grid = new Grid<>();
+        grid.addColumn(row -> row[0]).setHeader("ID").setAutoWidth(true);
+        grid.addColumn(row -> row[1]).setHeader("Nombre").setAutoWidth(true);
+        grid.addColumn(row -> row[2]).setHeader("Apellido").setAutoWidth(true);
+        grid.addColumn(row -> row[3]).setHeader("Edad").setAutoWidth(true);
+        grid.addColumn(row -> row[4]).setHeader("Peso").setAutoWidth(true);
+        grid.addColumn(row -> row[5]).setHeader("Altura").setAutoWidth(true);
+        grid.addColumn(row -> row[6]).setHeader("Rama").setAutoWidth(true);
+
+        layout.add(form, acciones, grid);
+        return layout;
+    }
+    // Método privado para gestionar la cuarta entidad: Aptos división especial
+    private Component crearSeccionAptosDivisionEspecial() {
+        VerticalLayout layout = new VerticalLayout();
+        layout.setPadding(false);
+
+        TextField idField = new TextField("ID");
+        TextField reclutaField = new TextField("ID del recluta");
+        Select<String> divisionSelect = new Select<String>();
+        divisionSelect.setLabel("División especial");
+        divisionSelect.setItems("Soldado de choque de descenso orbital (ODST)", "Oficina Naval de Inteligencia (ONI)");
+        Checkbox aptoCheck = new Checkbox("Apto para el servicio");
+
+        FormLayout form = new FormLayout(idField, reclutaField, divisionSelect, aptoCheck);
+
+        Button btnCrear = new Button("Crear", e ->
+            Notification.show("Entidad 4 - Crear para el recluta: " + reclutaField.getValue())
+        );
+        btnCrear.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        Button btnConsultar = new Button("Consultar", e ->
+            Notification.show("Entidad 4 - Consultar ID: " + idField.getValue())
+        );
+
+        Button btnActualizar = new Button("Actualizar", e ->
+            Notification.show("Entidad 4 - Actualizar ID: " + idField.getValue())
+        );
+
+        Button btnEliminar = new Button("Eliminar", e ->
+            Notification.show("Entidad 4 - Eliminar ID: " + idField.getValue())
+        );
+        btnEliminar.addThemeVariants(ButtonVariant.LUMO_ERROR);
+
+        Button btnLimpiar = new Button("Limpiar", e -> {
+            idField.clear();
+            reclutaField.clear();
+            divisionSelect.clear();
+            aptoCheck.clear();
+        });
+
+        HorizontalLayout acciones = new HorizontalLayout(
+            btnCrear, btnConsultar, btnActualizar, btnEliminar, btnLimpiar
+        );
+        acciones.getStyle().set("flex-wrap", "wrap");
+
+        Grid<String[]> grid = new Grid<>();
+        grid.addColumn(row -> row[0]).setHeader("ID").setAutoWidth(true);
+        grid.addColumn(row -> row[1]).setHeader("ID del recluta").setAutoWidth(true);
+        grid.addColumn(row -> row[2]).setHeader("División").setAutoWidth(true);
+        grid.addColumn(row -> row[3]).setHeader("Apto").setAutoWidth(true);
+
+        layout.add(form, acciones, grid);
         return layout;
     }
 }
